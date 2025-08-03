@@ -6,7 +6,16 @@ const text = ref('預設文字')
 const todos = ref([
     {
         id:1,
-        text:'學習Vue',
+        text:'學習Vue啦',
+        imageUrl:'https://plus.unsplash.com/premium_photo-1749326817907-80156e81a730?q=80&w=300&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    },    {
+        id:2,
+        text:'我也想學React',
+        imageUrl:'https://images.unsplash.com/photo-1746555697990-3a405a5152b9?w=300&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8'
+    },    {
+        id:3,
+        text:'Vue魔法',
+        imageUrl:'https://images.unsplash.com/photo-1751149784328-f75fb46c0e8d?w=300&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxN3x8fGVufDB8fHx8fA%3D%3D'
     }
 ])
 
@@ -72,6 +81,8 @@ function confirmEdit(){
     <div v-for="todo in todos" :key="todo.id">
     {{ todo.text }}<button type="button" @click="removeTodo(todo)">刪除</button>
     <button type="button" @click="prepareEdit(todo)">編輯</button>
+    {{ todo.imageUrl }}
+    <img :src="todo.imageUrl" alt="">
     </div>
     <hr>
     <div v-if="tempEdit.id">
