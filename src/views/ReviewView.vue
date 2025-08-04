@@ -24,12 +24,13 @@
             </tr>
         </tbody>
     </table>
+    <h2>總額:{{ sum }}</h2>
 </template>
 
 
 <script setup>
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const nweName = ref('');
 const newNumber = ref(0);
@@ -62,6 +63,17 @@ const delItem = (id) => {
     console.log(index)
     data.value.splice(index,1)
 }
+
+const sum = computed(()=>{
+console.log('sum', data.value);
+let tempSum = 0;
+data.value.forEach((item)=>{
+    tempSum = item.price + tempSum;
+});
+console.log(tempSum);
+return tempSum
+
+})
 
 </script>
 
