@@ -30,21 +30,12 @@
 
 <script setup>
 
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const nweName = ref('');
 const newNumber = ref(0);
 
-const data = ref([
-    { id:1, name:"珍珠奶茶", price: 50 },
-    { id:2, name:"冬瓜檸檬", price: 45 },
-    { id:3, name:"翡翠檸檬", price: 55 },
-    { id:4, name:"四季春茶", price: 45 },
-    { id:5, name:"阿薩姆奶茶", price: 50 },
-    { id:6, name:"檸檬冰茶", price: 45 },
-    { id:7, name:"芒果綠茶", price: 55 },
-    { id:8, name:"抹茶拿鐵", price: 60 },
-]);
+const data = ref([]);
 
 const addProduct = () => {
     console.log('addProduct',data.value);
@@ -64,16 +55,46 @@ const delItem = (id) => {
     data.value.splice(index,1)
 }
 
-const sum = computed(()=>{
-console.log('sum', data.value);
-let tempSum = 0;
-data.value.forEach((item)=>{
-    tempSum = item.price + tempSum;
-});
-console.log(tempSum);
-return tempSum
+// const sum = computed(()=>{
+// console.log('sum', data.value);
+// let tempSum = 0;
+// data.value.forEach((item)=>{
+//     tempSum = item.price + tempSum;
+// });
+// console.log(tempSum);
+// return tempSum
+// })
 
+const sum = computed(() => {
+    console.log('sum', data.value);
+    const tempSum = data.value.reduce((pre,item) => {
+        console.log(pre, item);
+        return pre + item.price
+    },0);
+    console.log(tempSum)
+    return tempSum;
 })
+
+// AJAX 
+onMounted(() => { 
+    setTimeout(() => { 
+        data.value = [
+            { id:1, name:"珍珠奶茶", price: 50 },
+            { id:2, name:"冬瓜檸檬", price: 45 },
+            { id:3, name:"翡翠檸檬", price: 55 },
+            { id:4, name:"四季春茶", price: 45 },
+            { id:5, name:"阿薩姆奶茶", price: 50 },
+            { id:6, name:"檸檬冰茶", price: 45 },
+            { id:7, name:"芒果綠茶", price: 55 },
+            { id:8, name:"抹茶拿鐵", price: 60 },
+        ]
+    },1000);   
+})
+
+
+
+
+
 
 </script>
 
